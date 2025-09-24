@@ -1,16 +1,20 @@
 from rest_framework import serializers
-from .models import Product
+from .models import Product, Category
 import cloudinary.uploader
 
 class ProductSerializer(serializers.ModelSerializer):
-    # Campo solo para subir la imagen
     image_file = serializers.ImageField(write_only=True, required=False)
+    status_display = serializers.CharField(source='get_status_display', read_only=True)
 
     class Meta:
         model = Product
-        # Incluimos el campo image_file para subir, pero image sigue siendo read-only
-        fields = ['id', 'name', 'description', 'price', 'image', 'image_file', 'created_at']
+        fields = [
+            'id', 'name', 'description', 'price',
+            'stock', 'status', 'status_display',
+            'image', 'image_file', 'created_at'
+        ]
         read_only_fields = ['image', 'created_at']
+
 
     def create(self, validated_data):
         # Si envían un archivo, lo subimos a Cloudinary
@@ -27,3 +31,8 @@ class ProductSerializer(serializers.ModelSerializer):
             result = cloudinary.uploader.upload(uploaded_file)
             validated_data['image'] = result['secure_url']
         return super().update(instance, validated_data)
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['id', 'name', 'description']

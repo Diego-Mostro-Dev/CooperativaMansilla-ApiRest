@@ -15,6 +15,12 @@ load_dotenv()
 # ─── Build paths inside the project ───────────────────────────
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+# Carpeta donde estarán los archivos de traducción ───────────────────────────
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
+
 # ─── Seguridad ───────────────────────────────────────────────
 SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG") == "True"
@@ -90,9 +96,11 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # ─── Internacionalización ────────────────────────────────────
-LANGUAGE_CODE = 'es-ar'
-TIME_ZONE = 'UTC'
+LANGUAGE_CODE = 'es-ar'  # Español de Argentina
+TIME_ZONE = 'America/Argentina/Buenos_Aires'
+
 USE_I18N = True
+USE_L10N = True
 USE_TZ = True
 
 # ─── Archivos estáticos ──────────────────────────────────────
