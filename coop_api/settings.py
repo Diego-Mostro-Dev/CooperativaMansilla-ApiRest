@@ -12,6 +12,11 @@ import cloudinary
 # ─── Cargar variables de entorno ──────────────────────────────
 load_dotenv()
 
+# ─── Configuración de Auth0 ──────────────────────────────────
+AUTH0_DOMAIN = os.getenv("AUTH0_DOMAIN")
+AUTH0_AUDIENCE = os.getenv("AUTH0_AUDIENCE")
+
+
 # ─── Build paths inside the project ───────────────────────────
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -48,6 +53,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'cloudinary_storage',
     'corsheaders',
+    'auth_api',
 ]
 
 MIDDLEWARE = [

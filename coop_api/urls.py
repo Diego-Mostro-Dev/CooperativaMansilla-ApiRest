@@ -19,5 +19,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('products.urls')),  # el enpoint de la API de productos
+    path('api/', include('products.urls')),# el enpoint de la API de productos
+    path('api/auth/', include('auth_api.urls')),  # el enpoint de autenticación
 ]
