@@ -17,7 +17,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
     def create(self, validated_data):
-        # Si envían un archivo, lo subimos a Cloudinary
+        # Si envían un archivo, lo subo a Cloudinary
         uploaded_file = validated_data.pop('image_file', None)
         if uploaded_file:
             result = cloudinary.uploader.upload(uploaded_file)

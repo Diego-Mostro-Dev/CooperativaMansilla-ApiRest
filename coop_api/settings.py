@@ -89,9 +89,22 @@ TEMPLATES = [
 WSGI_APPLICATION = 'coop_api.wsgi.application'
 
 # ─── Base de datos ───────────────────────────────────────────
-DATABASES = {
-    'default': dj_database_url.parse(os.getenv("DATABASE_URL"))
-}
+
+if os.getenv("DATABASE_URL"):
+    DATABASES = {
+        'default': dj_database_url.parse(
+            os.getenv("DATABASE_URL"),
+            conn_max_age=0,  # importante para evitar SSL drop
+            ssl_require=True
+        )
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # ─── Validación de contraseñas ───────────────────────────────
 AUTH_PASSWORD_VALIDATORS = [

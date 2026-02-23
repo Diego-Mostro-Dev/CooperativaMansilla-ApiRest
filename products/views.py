@@ -9,7 +9,7 @@ from .serializers import CategorySerializer
 # products/views.py
 class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
-    permission_classes = [permissions.AllowAny]  # Ajustar
+    permission_classes = [permissions.AllowAny]  
     parser_classes = [MultiPartParser, FormParser]  # Permite subir archivos desde la API
 
     def get_queryset(self):
